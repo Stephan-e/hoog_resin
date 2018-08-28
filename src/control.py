@@ -5,7 +5,7 @@ import time
 #logging.basicConfig(format='%(levelname)s-%(asctime)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,filename='/App/gpio.log')
 
 # Set GPIO mode: GPIO.BCM or GPIO.BOARD
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM) 
 
 # GPIO pins list based on GPIO.BOARD
 # gpioList1 = [17,18]
