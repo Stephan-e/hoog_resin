@@ -18,13 +18,21 @@ app.config['CELERY_TIMEZONE'] = 'UTC'
 from datetime import timedelta
 from celery.schedules import crontab
 app.config['CELERYBEAT_SCHEDULE'] = {
-    'play-every-morning': {
+    'water-every-morning': {
         'task': 'tasks.turn_water_on',
-        'schedule': crontab(hour=16, minute=52)
+        'schedule': crontab(hour=17, minute=10)
     },
-    'pause-later': {
+    'water-later': {
         'task': 'tasks.turn_water_off',
-        'schedule': crontab(hour=16, minute=53)
+        'schedule': crontab(hour=17, minute=11)
+    },
+    'COB-every-morning': {
+        'task': 'tasks.turn_COB_on',
+        'schedule': crontab(hour=17, minute=5)
+    },
+    'COB-later': {
+        'task': 'tasks.turn_COB_off',
+        'schedule': crontab(hour=1, minute=6)
     }
 }
 
@@ -33,22 +41,22 @@ celery.conf.update(app.config)
 
 @celery.task(name='tasks.turn_water_on')
 def turn_water_on():
-    print('pin 17 turned on')
-    return set_status(17, GPIO.HIGH)
+    print('Water (pin 17) turned on')
+    return set_status(17, GPIO.LOW)
 
 @celery.task(name='tasks.turn_water_off')
 def turn_water_off():
-    print('pin 17 turned off')
-    return set_status(17,GPIO.LOW)
+    print('Water (pin 17) turned off')
+    return set_status(17,GPIO.HIGH)
 
 @celery.task(name='tasks.turn_water_on')
 def turn_COB_on():
-    print('pin 17 turned on')
+    print('COB (pin 18) turned on')
     return set_status(18, GPIO.HIGH)
 
 @celery.task(name='tasks.turn_water_off')
 def turn_COB_off():
-    print('pin 17 turned off')
+    print('COB (pin 17) turned off')
     return set_status(18,GPIO.LOW)
 
 # Routes for manual controls
@@ -56,8 +64,7 @@ def turn_COB_off():
 
 @app.route('/')
 def hello_world():
-    msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>.'
-    msg = 'Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
+    msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>. Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
     return msg
 
 @app.route('/water_on')
