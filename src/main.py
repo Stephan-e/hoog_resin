@@ -1,7 +1,7 @@
 import json
 
 from flask import Flask
-from control import set_on, set_off
+from control import set_status
 import RPi.GPIO as GPIO
 
 
@@ -34,7 +34,7 @@ celery.conf.update(app.config)
 @celery.task(name='tasks.turn_on')
 def turn_on():
     print('pin 17 turned on')
-    return set_on(17, GPIO.HIGH)
+    return set_status(17, GPIO.HIGH)
 
 @celery.task(name='tasks.turn_off')
 def turn_off():
