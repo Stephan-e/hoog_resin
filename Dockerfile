@@ -6,6 +6,7 @@
 # for deployment to RPi2 via Resin.io
 FROM resin/armv7hf-debian:latest
 
+ENV READTHEDOCS True
 # install python3
 #================
 RUN apt-get update && apt-get install -yq --no-install-recommends \
@@ -28,7 +29,6 @@ RUN python3 -m venv --without-pip venv \
 #======================================
 COPY src/ /app
 
-RUN apt-get install python-pip
 # install dependencies
 #===================
 RUN /venv/bin/pip install -r /app/requirements.txt
