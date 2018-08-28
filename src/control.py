@@ -13,6 +13,8 @@ GPIO.setmode(GPIO.BCM)
 
 # Set mode for each gpio pin
 GPIO.setup(17, GPIO.OUT, initial= GPIO.HIGH)
+GPIO.setup(18, GPIO.OUT, initial= GPIO.LOW)
+
 #GPIO.setup(gpioList2, GPIO.IN)
 
 def set_status(pin,status):

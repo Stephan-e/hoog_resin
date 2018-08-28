@@ -20,11 +20,11 @@ from celery.schedules import crontab
 app.config['CELERYBEAT_SCHEDULE'] = {
     'play-every-morning': {
         'task': 'tasks.turn_on',
-        'schedule': crontab(hour=17, minute=20)
+        'schedule': crontab(hour=18, minute=26)
     },
     'pause-later': {
         'task': 'tasks.turn_off',
-        'schedule': crontab(hour=17, minute=21)
+        'schedule': crontab(hour=18, minute=27)
     }
 }
 
