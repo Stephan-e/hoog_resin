@@ -28,6 +28,8 @@ RUN python3 -m venv --without-pip venv \
 #======================================
 COPY src/ /app
 
+RUN pip3 install git+https://github.com/adafruit/Adafruit_Python_DHT.git 
+
 # install dependencies
 #===================
 RUN /venv/bin/pip install -r /app/requirements.txt
