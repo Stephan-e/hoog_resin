@@ -1,7 +1,6 @@
 import json
 
 from flask import Flask
-from tv import play, pause
 from control import set_on, set_off
 
 app = Flask(__name__)
