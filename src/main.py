@@ -79,12 +79,12 @@ def get_water_off():
 
 @app.route('/COB_on')
 def get_COB_on():
-    turn_water_on.delay()
+    turn_COB_on.delay()
     return 'Turning COB on! <a href="/">back</a>'
 
 @app.route('/COB_off')
 def get_COB_off():
-    turn_water_off.delay()
+    turn_COB_off.delay()
     return 'Turning COB off! <a href="/">back</a>'
 
 if __name__ == '__main__':
