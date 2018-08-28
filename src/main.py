@@ -20,11 +20,11 @@ from celery.schedules import crontab
 app.config['CELERYBEAT_SCHEDULE'] = {
     'play-every-morning': {
         'task': 'tasks.turn_water_on',
-        'schedule': crontab(hour=16, minute=45)
+        'schedule': crontab(hour=16, minute=52)
     },
     'pause-later': {
         'task': 'tasks.turn_water_off',
-        'schedule': crontab(hour=16, minute=46)
+        'schedule': crontab(hour=16, minute=53)
     }
 }
 
@@ -61,22 +61,22 @@ def hello_world():
     return msg
 
 @app.route('/water_on')
-def get_play():
+def get_water_on():
     turn_water_on.delay()
     return 'Turning water on! <a href="/">back</a>'
 
 @app.route('/water_off')
-def get_pause():
+def get_water_off():
     turn_water_off.delay()
     return 'Turning water off! <a href="/">back</a>'
 
 @app.route('/COB_on')
-def get_play():
+def get_COB_on():
     turn_water_on.delay()
     return 'Turning COB on! <a href="/">back</a>'
 
 @app.route('/COB_off')
-def get_pause():
+def get_COB_off():
     turn_water_off.delay()
     return 'Turning COB off! <a href="/">back</a>'
 
