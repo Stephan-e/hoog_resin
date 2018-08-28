@@ -2,6 +2,8 @@ import json
 
 from flask import Flask
 from control import set_on, set_off
+import RPi.GPIO as GPIO
+
 
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
@@ -32,12 +34,12 @@ celery.conf.update(app.config)
 @celery.task(name='tasks.turn_on')
 def turn_on():
     print('pin 17 turned on')
-    return set_on(17,1)
+    return set_on(17, GPIO.HIGH)
 
 @celery.task(name='tasks.turn_off')
 def turn_off():
     print('pin 17 turned off')
-    return set_status(17,0)
+    return set_status(17,GPIO.LOW)
 
 # Routes for manual controls
 ############################

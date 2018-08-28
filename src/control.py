@@ -12,7 +12,7 @@ GPIO.setmode(GPIO.BOARD)
 # gpioList2 = [14,15]
 
 # Set mode for each gpio pin
-GPIO.setup(17, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT, initial= GPIO.HIGH)
 #GPIO.setup(gpioList2, GPIO.IN)
 
 def set_status(pin,status):
