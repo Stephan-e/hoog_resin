@@ -8,12 +8,12 @@ import time
 GPIO.setmode(GPIO.BOARD)
 
 # GPIO pins list based on GPIO.BOARD
-gpioList1 = [17,18]
-gpioList2 = [14,15]
+# gpioList1 = [17,18]
+# gpioList2 = [14,15]
 
 # Set mode for each gpio pin
-GPIO.setup(gpioList1, GPIO.OUT)
-GPIO.setup(gpioList2, GPIO.IN)
+GPIO.setup(17, GPIO.OUT)
+#GPIO.setup(gpioList2, GPIO.IN)
 
 def set_status(pin,status):
     GPIO.output(pin, status)
