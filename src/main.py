@@ -20,11 +20,11 @@ from celery.schedules import crontab
 app.config['CELERYBEAT_SCHEDULE'] = {
     'play-every-morning': {
         'task': 'tasks.turn_water_on',
-        'schedule': crontab(hour=16, minute=35)
+        'schedule': crontab(hour=16, minute=45)
     },
     'pause-later': {
         'task': 'tasks.turn_water_off',
-        'schedule': crontab(hour=16, minute=35, second=10)
+        'schedule': crontab(hour=16, minute=46)
     }
 }
 
@@ -44,12 +44,12 @@ def turn_water_off():
 @celery.task(name='tasks.turn_water_on')
 def turn_COB_on():
     print('pin 17 turned on')
-    return set_status(17, GPIO.HIGH)
+    return set_status(18, GPIO.HIGH)
 
 @celery.task(name='tasks.turn_water_off')
 def turn_COB_off():
     print('pin 17 turned off')
-    return set_status(17,GPIO.LOW)
+    return set_status(18,GPIO.LOW)
 
 # Routes for manual controls
 ############################
