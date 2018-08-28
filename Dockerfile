@@ -28,7 +28,16 @@ RUN python3 -m venv --without-pip venv \
 #======================================
 COPY src/ /app
 
-RUN pip3 install git+https://github.com/adafruit/Adafruit_Python_DHT.git 
+FROM resin/%%RESIN_MACHINE_NAME%%-python:3
+WORKDIR /usr/src/app
+ENV INITSYSTEM on
+RUN apt-get update && apt-get install -yq --no-install-recommends wget build-essential \
+&& apt-get clean && rm -rf /var/lib/apt/lists*
+RUN pip3 install RPi.Gpio
+COPY . /usr/src/app
+RUN git clone https://github.com/adafruit/Adafruit_Python_DHT.git \
+&& cd Adafruit_Python_DHT && python3 setup.py install && cd ..
+CMD ["python3", "myfirstIOT.py"]
 
 # install dependencies
 #===================
