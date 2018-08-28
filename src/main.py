@@ -20,19 +20,19 @@ from celery.schedules import crontab
 app.config['CELERYBEAT_SCHEDULE'] = {
     'water-every-morning': {
         'task': 'tasks.turn_water_on',
-        'schedule': crontab(hour=17, minute=11)
+        'schedule': crontab(hour=10, minute=0)
     },
     'water-later': {
         'task': 'tasks.turn_water_off',
-        'schedule': crontab(hour=17, minute=12)
+        'schedule': crontab(hour=10, minute=1)
     },
     'COB-every-morning': {
         'task': 'tasks.turn_COB_on',
-        'schedule': crontab(hour=17, minute=8)
+        'schedule': crontab(hour=8, minute=0)
     },
     'COB-later': {
         'task': 'tasks.turn_COB_off',
-        'schedule': crontab(hour=1, minute=9)
+        'schedule': crontab(hour=23, minute=0)
     }
 }
 
@@ -42,22 +42,22 @@ celery.conf.update(app.config)
 @celery.task(name='tasks.turn_water_on')
 def turn_water_on():
     print('Water (pin 17) turned on')
-    return set_status(17, GPIO.LOW)
+    return set_status(17, GPIO.HIGH)
 
 @celery.task(name='tasks.turn_water_off')
 def turn_water_off():
     print('Water (pin 17) turned off')
-    return set_status(17,GPIO.HIGH)
+    return set_status(17,GPIO.LOW)
 
 @celery.task(name='tasks.turn_COB_on')
 def turn_COB_on():
     print('COB (pin 18) turned on')
-    return set_status(18, GPIO.LOW)
+    return set_status(18, GPIO.HIGH)
 
 @celery.task(name='tasks.turn_COB_off')
 def turn_COB_off():
     print('COB (pin 17) turned off')
-    return set_status(18,GPIO.HIGH)
+    return set_status(18,GPIO.LOW)
 
 # Routes for manual controls
 ############################
