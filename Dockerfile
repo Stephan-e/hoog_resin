@@ -28,13 +28,7 @@ RUN python3 -m venv --without-pip venv \
 #======================================
 COPY src/ /app
 
-RUN apt-get update && apt-get install -yq --no-install-recommends wget build-essential \
-&& apt-get clean && rm -rf /var/lib/apt/lists*
-RUN apt-get install git
-RUN git clone https://github.com/adafruit/Adafruit_Python_DHT.git \
-&& cd Adafruit_Python_DHT && python3 setup.py install --force-pi 
-
-
+RUN apt-get install python-pip
 # install dependencies
 #===================
 RUN /venv/bin/pip install -r /app/requirements.txt
