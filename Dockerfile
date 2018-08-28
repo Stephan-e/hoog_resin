@@ -34,7 +34,7 @@ RUN apt-get install python3-pip
 RUN python3 -m pip install --upgrade pip setuptools wheel
 RUN apt-get install git
 RUN git clone https://github.com/adafruit/Adafruit_Python_DHT.git \
-&& cd Adafruit_Python_DHT && python3 setup.py install && cd ..
+&& cd Adafruit_Python_DHT && python3 setup.py --force-pi install && cd ..
 #RUN pip3 install Adafruit_DHT --force-pi 
 
 # install dependencies
