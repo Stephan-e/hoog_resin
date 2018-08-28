@@ -30,9 +30,8 @@ COPY src/ /app
 
 RUN apt-get update && apt-get install -yq --no-install-recommends wget build-essential \
 && apt-get clean && rm -rf /var/lib/apt/lists*
-RUN sudo apt-get install python3-setuptools
-RUN sudo easy_install3 pip
-RUN pip3 install RPi.Gpio
+
+RUN pip install RPi.Gpio
 COPY . /usr/src/app
 RUN git clone https://github.com/adafruit/Adafruit_Python_DHT.git \
 && cd Adafruit_Python_DHT && python3 setup.py install && cd ..
