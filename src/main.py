@@ -2,6 +2,7 @@ import json
 
 from flask import Flask
 from tv import play, pause
+from control import set_on, set_off
 
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
@@ -17,45 +18,45 @@ from datetime import timedelta
 from celery.schedules import crontab
 app.config['CELERYBEAT_SCHEDULE'] = {
     'play-every-morning': {
-        'task': 'tasks.play_task',
-        'schedule': crontab(hour=9, minute=0)
+        'task': 'tasks.turn_on',
+        'schedule': crontab(hour=17, minute=20)
     },
     'pause-later': {
-        'task': 'tasks.pause_task',
-        'schedule': crontab(hour=9, minute=10)
+        'task': 'tasks.turn_off',
+        'schedule': crontab(hour=17, minute=21)
     }
 }
 
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
 
-@celery.task(name='tasks.play_task')
-def play_task():
-    print('play something')
-    return play()
+@celery.task(name='tasks.turn_on')
+def turn_on():
+    print('pin 17 turned on')
+    return set_on(17,1)
 
-@celery.task(name='tasks.pause_task')
-def pause_task():
-    print('enough fun')
-    return pause()
+@celery.task(name='tasks.turn_off')
+def turn_off():
+    print('pin 17 turned off')
+    return set_status(17,0)
 
 # Routes for manual controls
 ############################
 
 @app.route('/')
 def hello_world():
-    msg = 'Device: <a href="/play">play</a> or <a href="/pause">pause</a>.'
+    msg = 'Device: <a href="/on">Turn on</a> or <a href="/off">Turn off</a>.'
     return msg
 
-@app.route('/play')
+@app.route('/on')
 def get_play():
-    play_task.delay()
-    return 'Playing! <a href="/">back</a>'
+    turn_on.delay()
+    return 'Turning on! <a href="/">back</a>'
 
-@app.route('/pause')
+@app.route('/off')
 def get_pause():
-    pause_task.delay()
-    return 'Pausing! <a href="/">back</a>'
+    turn_off.delay()
+    return 'Turning off! <a href="/">back</a>'
 
 if __name__ == '__main__':
     try:
