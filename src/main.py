@@ -34,12 +34,12 @@ celery.conf.update(app.config)
 @celery.task(name='tasks.turn_on')
 def turn_on():
     print('pin 17 turned on')
-    return set_on(17, GPIO.HIGH)
+    return True #set_on(17, GPIO.HIGH)
 
 @celery.task(name='tasks.turn_off')
 def turn_off():
     print('pin 17 turned off')
-    return set_status(17,GPIO.LOW)
+    return False #set_status(17,GPIO.LOW)
 
 # Routes for manual controls
 ############################
