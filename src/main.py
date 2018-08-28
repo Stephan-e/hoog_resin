@@ -19,25 +19,35 @@ from datetime import timedelta
 from celery.schedules import crontab
 app.config['CELERYBEAT_SCHEDULE'] = {
     'play-every-morning': {
-        'task': 'tasks.turn_on',
-        'schedule': crontab(hour=18, minute=26)
+        'task': 'tasks.turn_water_on',
+        'schedule': crontab(hour=16, minute=35)
     },
     'pause-later': {
-        'task': 'tasks.turn_off',
-        'schedule': crontab(hour=18, minute=27)
+        'task': 'tasks.turn_water_off',
+        'schedule': crontab(hour=16, minute=35, second=10)
     }
 }
 
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
 
-@celery.task(name='tasks.turn_on')
-def turn_on():
+@celery.task(name='tasks.turn_water_on')
+def turn_water_on():
     print('pin 17 turned on')
     return set_status(17, GPIO.HIGH)
 
-@celery.task(name='tasks.turn_off')
-def turn_off():
+@celery.task(name='tasks.turn_water_off')
+def turn_water_off():
+    print('pin 17 turned off')
+    return set_status(17,GPIO.LOW)
+
+@celery.task(name='tasks.turn_water_on')
+def turn_COB_on():
+    print('pin 17 turned on')
+    return set_status(17, GPIO.HIGH)
+
+@celery.task(name='tasks.turn_water_off')
+def turn_COB_off():
     print('pin 17 turned off')
     return set_status(17,GPIO.LOW)
 
@@ -46,18 +56,29 @@ def turn_off():
 
 @app.route('/')
 def hello_world():
-    msg = 'Device: <a href="/on">Turn on</a> or <a href="/off">Turn off</a>.'
+    msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>.'
+    msg = 'Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
     return msg
 
-@app.route('/on')
+@app.route('/water_on')
 def get_play():
-    turn_on.delay()
-    return 'Turning on! <a href="/">back</a>'
+    turn_water_on.delay()
+    return 'Turning water on! <a href="/">back</a>'
 
-@app.route('/off')
+@app.route('/water_off')
 def get_pause():
-    turn_off.delay()
-    return 'Turning off! <a href="/">back</a>'
+    turn_water_off.delay()
+    return 'Turning water off! <a href="/">back</a>'
+
+@app.route('/COB_on')
+def get_play():
+    turn_water_on.delay()
+    return 'Turning COB on! <a href="/">back</a>'
+
+@app.route('/COB_off')
+def get_pause():
+    turn_water_off.delay()
+    return 'Turning COB off! <a href="/">back</a>'
 
 if __name__ == '__main__':
     try:
