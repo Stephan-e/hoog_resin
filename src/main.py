@@ -82,7 +82,7 @@ def create_user():
 
 @app.route('/')
 @login_required
-def home():
+def hello_world():
     msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>. Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
     return msg
 
