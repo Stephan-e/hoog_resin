@@ -29,7 +29,6 @@ RUN python3 -m venv --without-pip venv \
 #======================================
 COPY src/ /app
 
-WORKDIR /srv
 RUN apt-get update && apt-get upgrade
 RUN apt-get install python3-pip
 RUN python3 -m pip install --upgrade pip setuptools wheel
@@ -41,7 +40,6 @@ RUN git clone https://github.com/adafruit/Adafruit_Python_DHT.git \
 #===================
 RUN /venv/bin/pip install -r /app/requirements.txt
 
-ADD . /srv
 
 #run the app when the container starts
 #======================================s
