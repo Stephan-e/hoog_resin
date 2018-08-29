@@ -6,7 +6,14 @@ import RPi.GPIO as GPIO
 
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'super-secret'
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
+
+# Setup Flask-Security
+user_datastore = SQLAlchemySessionUserDatastore(db_session,
+                                                User, Role)
+security = Security(app, user_datastore)
 
 # Celery conf
 from celery import Celery
@@ -59,11 +66,19 @@ def turn_COB_off():
     print('COB (pin 17) turned off')
     return set_status(18,GPIO.LOW)
 
+# Create a user to test with
+@app.before_first_request
+def create_user():
+    init_db()
+    user_datastore.create_user(email='matt@nobien.net', password='password')
+    db_session.commit()
+
 # Routes for manual controls
 ############################
 
 @app.route('/')
-def hello_world():
+@login_required
+def home():
     msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>. Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
     return msg
 
