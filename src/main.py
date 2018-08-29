@@ -72,12 +72,12 @@ def turn_COB_off():
     print('COB (pin 17) turned off')
     return set_status(18,GPIO.LOW)
 
-# Create a user to test with
-@app.before_first_request
-def create_user():
-    init_db()
-    user_datastore.create_user(email='matt@nobien.net', password='password')
-    db_session.commit()
+# # Create a user to test with
+# @app.before_first_request
+# def create_user():
+#     init_db()
+#     user_datastore.create_user(email='matt@nobien.net', password='password')
+#     db_session.commit()
 
 # Routes for manual controls
 ############################
