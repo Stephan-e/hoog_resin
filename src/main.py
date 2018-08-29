@@ -3,6 +3,10 @@ import json
 from flask import Flask
 from control import set_status
 import RPi.GPIO as GPIO
+from flask_security import Security, login_required, \
+     SQLAlchemySessionUserDatastore
+from database import db_session, init_db
+from models import User, Role
 
 
 app = Flask(__name__)
