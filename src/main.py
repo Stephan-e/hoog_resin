@@ -10,14 +10,11 @@ from models import User, Role
 
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
-app.config['SECRET_KEY'] = 'super-secret'
-content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
+# app.config['DEBUG'] = True
+# app.config['SECRET_KEY'] = 'super-secret'
+# content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 
-# Setup Flask-Security
-user_datastore = SQLAlchemySessionUserDatastore(db_session,
-                                                User, Role)
-security = Security(app, user_datastore)
+
 
 # Celery conf
 from celery import Celery
@@ -49,6 +46,11 @@ app.config['CELERYBEAT_SCHEDULE'] = {
 
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
+
+# # Setup Flask-Security
+# user_datastore = SQLAlchemySessionUserDatastore(db_session,
+#                                                 User, Role)
+# security = Security(app, user_datastore)
 
 @celery.task(name='tasks.turn_water_on')
 def turn_water_on():
