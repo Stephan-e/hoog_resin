@@ -3,18 +3,10 @@ import json
 from flask import Flask
 from control import set_status
 import RPi.GPIO as GPIO
-from flask_security import Security, login_required, \
-     SQLAlchemySessionUserDatastore
-from database import db_session, init_db
-from models import User, Role
 
 
 app = Flask(__name__)
-# app.config['DEBUG'] = True
-# app.config['SECRET_KEY'] = 'super-secret'
-# content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
-
-
+content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 
 # Celery conf
 from celery import Celery
@@ -47,11 +39,6 @@ app.config['CELERYBEAT_SCHEDULE'] = {
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
 
-# # Setup Flask-Security
-# user_datastore = SQLAlchemySessionUserDatastore(db_session,
-#                                                 User, Role)
-# security = Security(app, user_datastore)
-
 @celery.task(name='tasks.turn_water_on')
 def turn_water_on():
     print('Water (pin 17) turned on')
@@ -72,18 +59,10 @@ def turn_COB_off():
     print('COB (pin 17) turned off')
     return set_status(18,GPIO.LOW)
 
-# # Create a user to test with
-# @app.before_first_request
-# def create_user():
-#     init_db()
-#     user_datastore.create_user(email='matt@nobien.net', password='password')
-#     db_session.commit()
-
 # Routes for manual controls
 ############################
 
 @app.route('/')
-@login_required
 def hello_world():
     msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>. Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
     return msg
