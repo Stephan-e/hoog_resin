@@ -29,7 +29,7 @@ RUN python3 -m venv --without-pip venv \
 #======================================
 COPY src/ /app
 
-RUN apt-get update
+RUN apt-get update && apt-get upgrade
 RUN apt-get install python3-pip
 RUN python3 -m pip install --upgrade pip setuptools wheel
 RUN apt-get install git
