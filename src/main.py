@@ -117,7 +117,7 @@ def get_COB_off():
 def create_user():
     try:
         init_db()
-        user_datastore.create_user(email='matt@nobien.net', password='password')
+        user_datastore.create_user(email='admin', password='password')
         db_session.commit()
         return 'Success'
     except:
