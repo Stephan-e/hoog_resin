@@ -65,11 +65,15 @@ def turn_COB_off():
 
 # Routes for manual controls
 ############################
-
 @app.route('/')
-def hello_world():
-    msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>. Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
-    return msg
+@login_required
+def home():
+    return render_template('index.html')
+
+# @app.route('/')
+# def hello_world():
+#     msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>. Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
+#     return msg
 
 @app.route('/water_on')
 def get_water_on():
