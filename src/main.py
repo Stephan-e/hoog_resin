@@ -14,6 +14,7 @@ app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'super-secret'
+app.config['SECURITY_PASSWORD_SALT'] = 'salt'
 
 # Setup Flask-Security
 user_datastore = SQLAlchemySessionUserDatastore(db_session,
@@ -75,17 +76,17 @@ def turn_COB_off():
 
 # Create a user to test with
 @app.before_first_request
-def create_user():
+def initialise_db():
     init_db()
-    user_datastore.create_user(email='matt@nobien.net', password='password')
     db_session.commit()
+
 
 # Routes for manual controls
 ############################
 @app.route('/')
 @login_required
 def home():
-    return render('Here you go!')
+    return render_template('dashboard.html')
 
 # @app.route('/')
 # def hello_world():
@@ -111,6 +112,17 @@ def get_COB_on():
 def get_COB_off():
     turn_COB_off.delay()
     return 'Turning COB off! <a href="/">back</a>'
+
+@app.route('/create_user')
+def create_user():
+    try:
+        init_db()
+        user_datastore.create_user(email='matt@nobien.net', password='password')
+        db_session.commit()
+        return 'Success'
+    except:
+        db_session.rollback()
+        return 'Failed'
 
 if __name__ == '__main__':
     try:

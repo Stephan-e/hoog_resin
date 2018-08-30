@@ -24,5 +24,6 @@ zeroconf==0.17.4
 RPi.Gpio
 flask_security
 flask_sqlalchemy
+bcrypt
 
 

@@ -14,8 +14,11 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 		python3-dev \
 		python3-dbus \
 		build-essential \
+		libssl-dev \
+		libffi-dev\
 		curl \
 		redis-server \
+		nano \
 	&& rm -rf /var/lib/apt/lists/*
 
 # create venv
