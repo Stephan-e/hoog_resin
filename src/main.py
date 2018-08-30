@@ -11,6 +11,14 @@ from flask_security import Security, SQLAlchemyUserDatastore, \
 
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
+app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'super-secret'
+
+# Setup Flask-Security
+user_datastore = SQLAlchemySessionUserDatastore(db_session,
+                                                User, Role)
+security = Security(app, user_datastore)
+
 
 # Celery conf
 from celery import Celery
@@ -63,12 +71,20 @@ def turn_COB_off():
     print('COB (pin 17) turned off')
     return set_status(18,GPIO.LOW)
 
+
+# Create a user to test with
+@app.before_first_request
+def create_user():
+    init_db()
+    user_datastore.create_user(email='matt@nobien.net', password='password')
+    db_session.commit()
+
 # Routes for manual controls
 ############################
 @app.route('/')
 @login_required
 def home():
-    return render_template('index.html')
+    return render('Here you go!')
 
 # @app.route('/')
 # def hello_world():
