@@ -3,9 +3,10 @@ import json
 from flask import Flask, render_template
 from control import set_status
 import RPi.GPIO as GPIO
-from flask_sqlalchemy import SQLAlchemy
-from flask_security import Security, SQLAlchemyUserDatastore, \
-    UserMixin, RoleMixin, login_required
+from flask_security import Security, login_required, \
+     SQLAlchemySessionUserDatastore
+from database import db_session, init_db
+from models import User, Role
 
 
 
