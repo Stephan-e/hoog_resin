@@ -13,7 +13,6 @@ loggly-python-handler==1.0.0
 MarkupSafe==0.23
 netifaces==0.10.4
 protobuf==3.0.0b1.post2
-PyChromecast==0.6.13
 pytz==2015.7
 redis==2.10.5
 requests==2.8.1
