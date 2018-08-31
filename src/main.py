@@ -24,7 +24,7 @@ security = Security(app, user_datastore)
 
 # Celery conf
 from celery import Celery
-app.config['CELERY_BROKER_URL'] = 'redis://localhost:6380/0'
+app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
 #app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 app.config['CELERY_TIMEZONE'] = 'UTC'
 
