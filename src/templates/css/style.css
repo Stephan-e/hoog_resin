@@ -26,3 +26,10 @@
 @media (max-width: 1199.98px) {
   .sidebar-fixed {
     display: none; } }
+
+.login-head {
+ 
+  height: 100vh;
+  width: 270px;
+
+}
