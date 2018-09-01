@@ -92,6 +92,10 @@ def home():
 # def hello_world():
 #     msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>. Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
 #     return msg
+@app.route('/water_status')
+def get_water_status():
+    status = GPIO.input(18)
+    return '{{status}}'
 
 @app.route('/water_on')
 def get_water_on():
@@ -102,6 +106,11 @@ def get_water_on():
 def get_water_off():
     turn_water_off.delay()
     return 'Turning water off! <a href="/">back</a>'
+
+@app.route('/COB_status')
+def get_COB_status():
+    status = GPIO.input(17)
+    return status
 
 @app.route('/COB_on')
 def get_COB_on():

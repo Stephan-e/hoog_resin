@@ -58,7 +58,7 @@
                                 COB light toggle
                             </p>
 
-                            <p role="button" class="btn btn-info badge-primary"> 
+                            <p role="button" class="btn btn-info badge-primary" type="submit" onclick="set_water_on()"> 
                                 Water toggle
                             </p>
 
@@ -178,6 +178,9 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+    <!-- js functions -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
     <!-- Initializations -->
     <script type="text/javascript">
         // Animations initialization
