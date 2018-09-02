@@ -19,4 +19,8 @@ GPIO.setup(18, GPIO.OUT, initial= GPIO.HIGH)
 
 def set_status(pin,status):
     GPIO.output(pin, status)
+    return GPIO.input(pin)
+
+def get_status(pin,status):
+    return GPIO.input(pin)
 

@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from control import set_status
 import RPi.GPIO as GPIO
 from flask_security import Security, login_required, \
@@ -21,6 +21,8 @@ user_datastore = SQLAlchemySessionUserDatastore(db_session,
                                                 User, Role)
 security = Security(app, user_datastore)
 
+water_pin = 17
+COB_pin = 18
 
 # Celery conf
 from celery import Celery
@@ -56,22 +58,22 @@ celery.conf.update(app.config)
 @celery.task(name='tasks.turn_water_on')
 def turn_water_on():
     print('Water (pin 17) turned on')
-    return set_status(17, GPIO.HIGH)
+    return set_status(water_pin, GPIO.HIGH)
 
 @celery.task(name='tasks.turn_water_off')
 def turn_water_off():
     print('Water (pin 17) turned off')
-    return set_status(17,GPIO.LOW)
+    return set_status(water_pin,GPIO.LOW)
 
 @celery.task(name='tasks.turn_COB_on')
 def turn_COB_on():
     print('COB (pin 18) turned on')
-    return set_status(18, GPIO.HIGH)
+    return set_status(COB_pin, GPIO.HIGH)
 
 @celery.task(name='tasks.turn_COB_off')
 def turn_COB_off():
     print('COB (pin 17) turned off')
-    return set_status(18,GPIO.LOW)
+    return set_status(COB_pin,GPIO.LOW)
 
 
 # Create a user to test with
@@ -94,33 +96,43 @@ def home():
 #     return msg
 @app.route('/water_status')
 def get_water_status():
-    status = GPIO.input(18)
-    return '{{status}}'
+    return jsonify(
+        status=GPIO.input(water_pin)
+    )
 
 @app.route('/water_on')
 def get_water_on():
     turn_water_on.delay()
-    return 'Turning water on! <a href="/">back</a>'
+    return jsonify(
+        status=GPIO.input(water_pin)
+    )
 
 @app.route('/water_off')
 def get_water_off():
     turn_water_off.delay()
-    return 'Turning water off! <a href="/">back</a>'
+    return jsonify(
+        status=GPIO.input(water_pin)
+    )
 
 @app.route('/COB_status')
 def get_COB_status():
-    status = GPIO.input(17)
-    return status
+    return jsonify(
+        status=GPIO.input(COB_pin)
+    )
 
 @app.route('/COB_on')
 def get_COB_on():
     turn_COB_on.delay()
-    return 'Turning COB on! <a href="/">back</a>'
+    return jsonify(
+        status=GPIO.input(COB_pin)
+    )
 
 @app.route('/COB_off')
 def get_COB_off():
     turn_COB_off.delay()
-    return 'Turning COB off! <a href="/">back</a>'
+    return jsonify(
+        status=GPIO.input(COB_pin)
+    )
 
 @app.route('/create_user')
 def create_user():
