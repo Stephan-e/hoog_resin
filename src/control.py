@@ -1,5 +1,7 @@
 import RPi.GPIO as GPIO
 import time
+import Adafruit_DHT
+
 #import logging
 
 #logging.basicConfig(format='%(levelname)s-%(asctime)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,filename='/App/gpio.log')
@@ -23,4 +25,13 @@ def set_status(pin,status):
 
 def get_status(pin,status):
     return GPIO.input(pin)
+
+def get_temp(pin):
+    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
+    return temperature
+
+def get_humid(pin):
+    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
+    return humidity
+
 

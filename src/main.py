@@ -1,7 +1,7 @@
 import json
 
 from flask import Flask, render_template, jsonify
-from control import set_status
+from control import set_status, get_temp, get_humid 
 import RPi.GPIO as GPIO
 from flask_security import Security, login_required, \
      SQLAlchemySessionUserDatastore
@@ -23,6 +23,7 @@ security = Security(app, user_datastore)
 
 water_pin = 17
 COB_pin = 18
+temp_hum_pin = 15
 
 # Celery conf
 from celery import Celery
@@ -90,10 +91,6 @@ def initialise_db():
 def home():
     return render_template('dashboard.html')
 
-# @app.route('/')
-# def hello_world():
-#     msg = 'Device: <a href="/water_on">Turn water on</a> or <a href="/water_off">Turn water off</a>. Device: <a href="/COB_on">Turn COB on</a> or <a href="/COB_off">Turn COB off</a>.'
-#     return msg
 @app.route('/water_status')
 def get_water_status():
     return jsonify(
@@ -133,6 +130,21 @@ def get_COB_off():
     return jsonify(
         status=GPIO.input(COB_pin)
     )
+
+@app.route('/temperature')
+def get_temperature():
+    temperature = get_temp(temp_hum_pin)
+    return jsonify(
+        temperature=temperature
+    )
+
+@app.route('/humidity')
+def get_humidity():
+    humidity = get_humid(temp_hum_pin)
+    return jsonify(
+        humidity=humidity
+    )
+
 
 @app.route('/create_user')
 def create_user():

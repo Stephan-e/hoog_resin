@@ -19,7 +19,13 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 		curl \
 		redis-server \
 		nano \
-	&& rm -rf /var/lib/apt/lists/*
+		git \
+		python3-pip 
+	# && rm -rf /var/lib/apt/lists/* \
+	# cd /tmp/ && git clone https://github.com/adafruit/Adafruit_Python_DHT.git && \
+    # cd Adafruit_Python_DHT && python3 setup.py install && \
+	# apt-get install git-core build-essential python3-dev python3-pip && \
+	# apt-get -y autoremove && apt-get clean && rm -rf /tmp/*
 
 # create venv
 #===================================
@@ -32,12 +38,10 @@ RUN python3 -m venv --without-pip venv \
 #======================================
 COPY src/ /app
 
-RUN apt-get update && apt-get upgrade
-RUN apt-get install python3-pip
-RUN python3 -m pip install --upgrade pip setuptools wheel
-RUN apt-get install git
-RUN git clone https://github.com/adafruit/Adafruit_Python_DHT.git \
-&& cd Adafruit_Python_DHT && python3 setup.py --force-pi install && cd ..
+# RUN apt-get update && apt-get upgrade
+# RUN apt-get install python3-pip
+# RUN python3 -m pip install --upgrade pip setuptools wheel
+# RUN apt-get install git
 
 # install dependencies
 #===================
