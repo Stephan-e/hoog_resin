@@ -1,11 +1,12 @@
 import RPi.GPIO as GPIO
 import time
+import pip
 
 def install(package):
-    if hasattr(pip3, 'main'):
-        pip3.main(['install', package])
+    if hasattr(pip, 'main'):
+        pip.main(['install', package])
     else:
-        pip3._internal.main(['install', package])
+        pip._internal.main(['install', package])
 
 try:
     import Adafruit_DHT
