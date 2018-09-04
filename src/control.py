@@ -5,11 +5,14 @@ import sys
 
 def install(package):
     subprocess.call([sys.executable, "-m", "pip3", "install", package])
-    
-try:
-    import Adafruit_DHT
-except:
-    install('Adafruit-DHT==1.3.4')
+
+def installfruit():    
+    try:
+        import Adafruit_DHT
+    except:
+        install('Adafruit-DHT==1.3.4')
+
+installfruit()
 
 #import logging
 
@@ -37,6 +40,7 @@ def get_status(pin,status):
 
 def get_temp(pin):
     try:
+        installfruit()
         humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
     except ImportError as e:
         print(e)
