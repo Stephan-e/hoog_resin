@@ -45,7 +45,7 @@ COPY src/ /app
 
 # install dependencies
 #===================
-RUN /venv/bin/pip install -r /app/requirements.txt --force-pi
+RUN /venv/bin/pip install -r /app/requirements.txt 
 
 
 #run the app when the container starts
