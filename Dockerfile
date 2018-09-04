@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 	#apt-get update git-core build-essential python3-dev python3-pip \
 	apt-get -y autoremove && apt-get clean && rm -rf /tmp/* && rm -rf /Adafruit_Python_DHT
 
+
 # create venv
 #===================================
 # --without-pip and curl necessary because somee Debian/Ubuntu versions
