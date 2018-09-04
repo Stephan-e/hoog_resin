@@ -1,9 +1,11 @@
 import RPi.GPIO as GPIO
 import time
-import pip
+import subprocess
+import sys
+
 
 def install(package):
-    pip.main(['install', package])
+    subprocess.call([sys.executable, "-m", "pip3", "install", package])
     
 
 try:
