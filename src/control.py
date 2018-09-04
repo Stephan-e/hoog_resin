@@ -2,20 +2,16 @@ import RPi.GPIO as GPIO
 import time
 import subprocess
 import sys
-import am2302_rpi
 
-# def install(package):
-#     subprocess.call([sys.executable, "-m", "pip3", "install", package])
+def install(package):
+    subprocess.call([sys.executable, "-m", "pip3", "install", package])
 
-# def installfruit():    
-#     try:
-#         import Adafruit_DHT
-#     except:
-#         install('Adafruit-DHT==1.3.4')
 
-# installfruit()
+try:
+    import Adafruit_DHT
+except:
+    install('Adafruit-DHT==1.3.4')
 
-s = am2302_rpi.Sensor(15)
 
 
 #import logging
@@ -44,16 +40,15 @@ def get_status(pin,status):
 
 def get_temp(pin):
     try:
-        temperature = s.get()
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
     except:
         return 0 
     return temperature
 
 def get_humid(pin):
     try:
-        temperature = s.get()
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
     except:
-        print(e)
         return 0
     return humidity
 

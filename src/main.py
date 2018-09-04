@@ -7,7 +7,6 @@ from flask_security import Security, login_required, \
      SQLAlchemySessionUserDatastore
 from database import db_session, init_db
 from models import User, Role
-import pip
 
 
 app = Flask(__name__)
@@ -158,7 +157,6 @@ def create_user():
         return 'Failed'
 
 if __name__ == '__main__':
-    install('Adafruit-DHT==1.3.4')
     try:
         # try the production run
         app.run(host='0.0.0.0', port=80)
