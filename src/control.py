@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import time
 import subprocess
 import sys
@@ -19,24 +19,24 @@ except:
 #logging.basicConfig(format='%(levelname)s-%(asctime)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG,filename='/App/gpio.log')
 
 # Set GPIO mode: GPIO.BCM or GPIO.BOARD
-GPIO.setmode(GPIO.BCM) 
+# GPIO.setmode(GPIO.BCM) 
 
 # GPIO pins list based on GPIO.BOARD
 # gpioList1 = [17,18]
 # gpioList2 = [14,15]
 
 # Set mode for each gpio pin
-GPIO.setup(17, GPIO.OUT, initial= GPIO.LOW)
-GPIO.setup(18, GPIO.OUT, initial= GPIO.HIGH)
+# GPIO.setup(17, GPIO.OUT, initial= GPIO.LOW)
+# GPIO.setup(18, GPIO.OUT, initial= GPIO.HIGH)
 
 #GPIO.setup(gpioList2, GPIO.IN)
 
 def set_status(pin,status):
-    GPIO.output(pin, status)
-    return GPIO.input(pin)
+    # GPIO.output(pin, status)
+    return 'GPIO.input(pin)'
 
 def get_status(pin,status):
-    return GPIO.input(pin)
+    return 'GPIO.input(pin)'
 
 def get_temp(pin):
     try:
