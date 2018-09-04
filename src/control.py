@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 def install(package):
-    subprocess.call([sys.executable, "-m", "pip3", "install", package])
+    subprocess.call([sys.executable, "-m", "pip", "install", package])
 
 try:
     install('Adafruit-DHT==1.3.4')
