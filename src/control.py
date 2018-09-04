@@ -7,10 +7,10 @@ def install(package):
     subprocess.call([sys.executable, "-m", "pip3", "install", package])
 
 try:
+    install('Adafruit-DHT==1.3.4')
     import Adafruit_DHT
 except:
     install('Adafruit-DHT==1.3.4')
-    import Adafruit_DHT
 
 
 
