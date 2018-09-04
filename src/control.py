@@ -51,8 +51,8 @@ def get_temp(pin):
 
 def get_humid(pin):
     try:
-        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
-    except ImportError as e:
+        temperature = s.get()
+    except:
         print(e)
         return 0
     return humidity
