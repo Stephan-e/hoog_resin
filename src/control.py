@@ -3,10 +3,8 @@ import time
 import pip
 
 def install(package):
-    if hasattr(pip, 'main'):
-        pip.main(['install', package])
-    else:
-        pip._internal.main(['install', package])
+    pip.main(['install', package])
+    
 
 try:
     import Adafruit_DHT
