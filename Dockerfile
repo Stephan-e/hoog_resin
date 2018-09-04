@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 	cd /tmp/ && git clone https://github.com/adafruit/Adafruit_Python_DHT.git && \
     cd Adafruit_Python_DHT && sudo python3 setup.py install --force-pi && \
 	#apt-get update git-core build-essential python3-dev python3-pip \
-	apt-get -y autoremove && apt-get clean && rm -rf /tmp/* && rm -rf /Adafruit_Python_DHT
+	apt-get -y autoremove && apt-get clean && rm -rf /tmp/* 
 
 
 # create venv
