@@ -54,7 +54,7 @@
                         <!--Card content-->
                         <div class="card-body">
 
-                            <p role="button" class="btn btn-info badge-primary"> 
+                            <p onclick="light_on()" role="button" class="btn btn-info badge-primary"> 
                                 COB light toggle
                             </p>
 
@@ -97,18 +97,18 @@
 
                                 <a class="list-group-item list-group-item-action waves-effect">
                                     Temperature
-                                    <span class="badge badge-primary badge pull-right">22
+                                    <span id='temperature' class="badge badge-primary badge pull-right">22
                                         
                                     </span>
                                 </a>
                                 <a class="list-group-item list-group-item-action waves-effect">
                                     Humidity
-                                    <span class="badge badge-primary badge pull-right">5%
+                                    <span id='humidity' class="badge badge-primary badge pull-right">5%
                                     </span>
                                 </a>
                                 <a class="list-group-item list-group-item-action waves-effect">
                                     Soil Moisture
-                                    <span class="badge badge-primary badge pull-right">14</span>
+                                    <span id='water_status' class="badge badge-primary badge pull-right">14</span>
                                 </a>
                                 
                             </div>
@@ -185,6 +185,69 @@
     <script type="text/javascript">
         // Animations initialization
         new WOW().init();
+
+        get_humidity()
+        get_water_status()
+        get_temp()
+
+        function set_water_on() {
+            console.log("THIS MUST TURN ON THE WATER");
+            $.get( "http://localhost:5000/water_on", function( data ) {
+                console.log(data);
+            })
+            
+        }
+
+        function set_water_off() {
+            console.log("THIS MUST TURN ON THE WATER");
+            $.get( "http://localhost:5000/water_off", function( data ) {
+                console.log(data);
+            })
+            
+        }
+
+        function light_on() {
+            console.log("THIS MUST TOGGLE THE LIGHT");
+            $.get( "http://localhost:5000/COB_on", function( data ) {
+                console.log(data);
+            })
+            
+        }
+
+        function light_off() {
+            console.log("THIS MUST TOGGLE THE LIGHT");
+            $.get( "http://localhost:5000/COB_off", function( data ) {
+                console.log(data);
+            })
+            
+        }
+
+        function get_temp() {
+            console.log("THIS MUST TOGGLE THE LIGHT");
+            $.get( "http://localhost:5000/temperature", function( data ) {
+                console.log("TEMP STATUS", data);
+                $('#temperature').html(data.temperature)
+            })
+            
+        }
+
+        function get_humidity() {
+            console.log("THIS MUST TOGGLE THE LIGHT");
+            $.get( "http://localhost:5000/humidity", function( data ) {
+                console.log("HUMIDITY STATUS", data);
+                $('#humidity').html(data.humidity)
+            })
+            
+        }
+
+         function get_water_status() {
+            console.log("THIS MUST TOGGLE THE LIGHT");
+            $.get( "http://localhost:5000/water_status", function( data ) {
+                console.log("WATER STATUS", data);
+                $('#water_status').html(data.status)
+            })
+            
+        }
     </script>
 
     
