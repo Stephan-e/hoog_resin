@@ -3,11 +3,9 @@ import time
 import subprocess
 import sys
 
-
 def install(package):
     subprocess.call([sys.executable, "-m", "pip3", "install", package])
     
-
 try:
     import Adafruit_DHT
 except:
@@ -41,13 +39,17 @@ def get_status(pin,status):
     return GPIO.input(pin)
 
 def get_temp(pin):
-    #humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
-    temperature = 24
+    try:
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
+    except:
+        return 0 
     return temperature
 
 def get_humid(pin):
-    #humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
-    humidity = 70
+    try:
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, pin)
+    except:
+        return 0
     return humidity
 
 
