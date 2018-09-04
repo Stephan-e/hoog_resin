@@ -192,7 +192,7 @@
 
         function set_water_on() {
             console.log("THIS MUST TURN ON THE WATER");
-            $.get( "http://localhost:5000/water_on", function( data ) {
+            $.get( "http://localhost/water_on", function( data ) {
                 console.log(data);
             })
             
@@ -200,7 +200,7 @@
 
         function set_water_off() {
             console.log("THIS MUST TURN ON THE WATER");
-            $.get( "http://localhost:5000/water_off", function( data ) {
+            $.get( "http://localhost/water_off", function( data ) {
                 console.log(data);
             })
             
@@ -208,7 +208,7 @@
 
         function light_on() {
             console.log("THIS MUST TOGGLE THE LIGHT");
-            $.get( "http://localhost:5000/COB_on", function( data ) {
+            $.get( "http://localhost/COB_on", function( data ) {
                 console.log(data);
             })
             
@@ -216,7 +216,7 @@
 
         function light_off() {
             console.log("THIS MUST TOGGLE THE LIGHT");
-            $.get( "http://localhost:5000/COB_off", function( data ) {
+            $.get( "http://localhost/COB_off", function( data ) {
                 console.log(data);
             })
             
