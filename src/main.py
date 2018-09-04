@@ -99,14 +99,14 @@ def get_water_status():
 
 @app.route('/water_on')
 def get_water_on():
-    turn_water_on.delay()
+    turn_water_on()
     return jsonify(
         status=GPIO.input(water_pin)
     )
 
 @app.route('/water_off')
 def get_water_off():
-    turn_water_off.delay()
+    turn_water_off()
     return jsonify(
         status=GPIO.input(water_pin)
     )
@@ -119,14 +119,14 @@ def get_COB_status():
 
 @app.route('/COB_on')
 def get_COB_on():
-    turn_COB_on.delay()
+    turn_COB_on()
     return jsonify(
         status=GPIO.input(COB_pin)
     )
 
 @app.route('/COB_off')
 def get_COB_off():
-    turn_COB_off.delay()
+    turn_COB_off()
     return jsonify(
         status=GPIO.input(COB_pin)
     )
