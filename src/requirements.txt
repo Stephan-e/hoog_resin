@@ -24,6 +24,6 @@ RPi.Gpio
 flask_security
 flask_sqlalchemy
 bcrypt
-Adafruit-DHT==1.3.4
+Adafruit-DHT==1.3.4 --force-pi
 
 
