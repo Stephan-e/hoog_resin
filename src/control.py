@@ -1,6 +1,16 @@
 import RPi.GPIO as GPIO
 import time
-#import Adafruit_DHT
+try:
+    import Adafruit_DHT
+except:
+    install('Adafruit-DHT==1.3.4')
+
+def install(package):
+    if hasattr(pip3, 'main'):
+        pip3.main(['install', package])
+    else:
+        pip3._internal.main(['install', package])
+
 
 #import logging
 

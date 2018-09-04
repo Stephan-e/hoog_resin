@@ -9,11 +9,6 @@ from database import db_session, init_db
 from models import User, Role
 import pip
 
-def install(package):
-    if hasattr(pip, 'main'):
-        pip.main(['install', package])
-    else:
-        pip._internal.main(['install', package])
 
 app = Flask(__name__)
 content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
