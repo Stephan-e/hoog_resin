@@ -223,22 +223,6 @@
             
         }
 
-        unction set_vent_on() {
-            console.log("THIS MUST TURN ON THE WATER");
-            $.get( {{ request.script_root|tojson|safe }} + '/vent_on', function( data ) {
-                console.log(data);
-            })
-            
-        }
-
-        function set_vent_off() {
-            console.log("THIS MUST TURN ON THE WATER");
-            $.get( {{ request.script_root|tojson|safe }} + '/vent_off', function( data ) {
-                console.log(data);
-            })
-            
-        }
-
         function light_on() {
             console.log("THIS MUST TOGGLE THE LIGHT");
             $.get( {{ request.script_root|tojson|safe }} + '/COB_on', function( data ) {
@@ -254,7 +238,22 @@
             })
             
         }
-        
+
+        function set_vent_on() {
+            console.log("THIS MUST TURN ON THE VENT");
+            $.get( {{ request.script_root|tojson|safe }} + '/vent_on', function( data ) {
+                console.log(data);
+            })
+            
+        }
+
+        function set_vent_off() {
+            console.log("THIS MUST TURN ON THE VENT");
+            $.get( {{ request.script_root|tojson|safe }} + '/vent_off', function( data ) {
+                console.log(data);
+            })
+            
+        }
 
         function get_temp() {
             console.log("THIS MUST RETURN THE TEMP");
