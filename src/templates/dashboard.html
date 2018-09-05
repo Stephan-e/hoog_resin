@@ -55,11 +55,19 @@
                         <div class="card-body">
 
                             <p onclick="light_on()" role="button" class="btn btn-info badge-primary"> 
-                                COB light toggle
+                                COB light on
                             </p>
 
-                            <p role="button" class="btn btn-info badge-primary" type="submit" onclick="set_water_on()"> 
-                                Water toggle
+                            <p onclick="light_on()" role="button" class="btn btn-info badge-primary"> 
+                                    COB light off
+                            </p>
+
+                            <p role="button" class="btn btn-info badge-primary"  onclick="set_water_on()"> 
+                                Water on
+                            </p>
+
+                            <p role="button" class="btn btn-info badge-primary"  onclick="set_water_off()"> 
+                                    Water off
                             </p>
 
                         </div>
@@ -106,10 +114,10 @@
                                     <span id='humidity' class="badge badge-primary badge pull-right">
                                     </span>
                                 </a>
-                                <a class="list-group-item list-group-item-action ">
+                                <!-- <a class="list-group-item list-group-item-action ">
                                     Soil Moisture
                                     <span id='water_status' class="badge badge-primary badge pull-right"></span>
-                                </a>
+                                </a> -->
                                 
                             </div>
                             <!-- List group links -->
