@@ -7,6 +7,7 @@ from flask_security import Security, login_required, \
      SQLAlchemySessionUserDatastore
 from database import db_session, init_db
 from models import User, Role
+from camera import Camera
 
 
 app = Flask(__name__)
@@ -90,6 +91,12 @@ def initialise_db():
 def home():
     return render_template('dashboard.html')
 
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 @app.route('/water_status')
 def get_water_status():
     return jsonify(
@@ -143,6 +150,11 @@ def get_humidity():
     return jsonify(
         humidity=humidity
     )
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/create_user')
