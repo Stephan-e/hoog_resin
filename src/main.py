@@ -90,54 +90,54 @@ def initialise_db():
 def home():
     return render_template('dashboard.html')
 
-@water_status.route('/water_status')
+@app.route('/water_status')
 def get_water_status():
     return jsonify(
         status=GPIO.input(water_pin)
     )
 
-@water_on.route('/water_on')
+@app.route('/water_on')
 def get_water_on():
     turn_water_on()
     return jsonify(
         status=GPIO.input(water_pin)
     )
 
-@water_off.route('/water_off')
+@app.route('/water_off')
 def get_water_off():
     turn_water_off()
     return jsonify(
         status=GPIO.input(water_pin)
     )
 
-@COB_status.route('/COB_status')
+@app.route('/COB_status')
 def get_COB_status():
     return jsonify(
         status=GPIO.input(COB_pin)
     )
 
-@COB_on.route('/COB_on')
+@app.route('/COB_on')
 def get_COB_on():
     turn_COB_on()
     return jsonify(
         status=GPIO.input(COB_pin)
     )
 
-@COB_off.route('/COB_off')
+@app.route('/COB_off')
 def get_COB_off():
     turn_COB_off()
     return jsonify(
         status=GPIO.input(COB_pin)
     )
 
-@temperature.route('/temperature')
+@app.route('/temperature')
 def get_temperature():
     temperature = get_temp(temp_hum_pin)
     return jsonify(
         temperature=temperature
     )
 
-@humidity.route('/humidity')
+@app.route('/humidity')
 def get_humidity():
     humidity = get_humid(temp_hum_pin)
     return jsonify(

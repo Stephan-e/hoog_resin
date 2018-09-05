@@ -190,9 +190,11 @@
         get_water_status()
         get_temp()
 
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
         function set_water_on() {
             console.log("THIS MUST TURN ON THE WATER");
-            $.get( "{{ url_for('water_on.get }}", function( data ) {
+            $.get( $SCRIPT_ROOT + '/_add_numbers', function( data ) {
                 console.log(data);
             })
             
