@@ -24,6 +24,7 @@ security = Security(app, user_datastore)
 water_pin = 17
 COB_pin = 18
 temp_hum_pin = 15
+vent_pin = 15
 
 # Celery conf
 from celery import Celery
@@ -75,6 +76,16 @@ def turn_COB_on():
 def turn_COB_off():
     print('COB (pin 17) turned off')
     return set_status(COB_pin,GPIO.LOW)
+
+@celery.task(name='tasks.turn_vent_on')
+def turn_vent_on():
+    print('vent (pin 14) turned on')
+    return set_status(vent_pin, GPIO.HIGH)
+
+@celery.task(name='tasks.turn_vent_off')
+def turn_vent_off():
+    print('vent (pin 14) turned off')
+    return set_status(vent_pin,GPIO.LOW)
 
 
 # Create a user to test with
@@ -136,6 +147,22 @@ def get_COB_off():
     return jsonify(
         status=GPIO.input(COB_pin)
     )
+
+@app.route('/vent_off')
+def get_vent_off():
+    turn_vent_off()
+    return jsonify(
+        status=GPIO.input(vent_pin)
+    )
+
+@app.route('/vent_on')
+def get_vent_on():
+    turn_vent_on()
+    return jsonify(
+        status=GPIO.input(vent_pin)
+    )
+
+
 
 @app.route('/temperature')
 def get_temperature():
