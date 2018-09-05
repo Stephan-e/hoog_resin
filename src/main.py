@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, Response
 from control import set_status, get_temp, get_humid 
 import RPi.GPIO as GPIO
 from flask_security import Security, login_required, \
