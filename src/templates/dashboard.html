@@ -194,7 +194,7 @@
 
         function set_water_on() {
             console.log("THIS MUST TURN ON THE WATER");
-            $.get( $SCRIPT_ROOT + '/_add_numbers', function( data ) {
+            $.get( $SCRIPT_ROOT + '/water_on', function( data ) {
                 console.log(data);
             })
             
@@ -202,7 +202,7 @@
 
         function set_water_off() {
             console.log("THIS MUST TURN ON THE WATER");
-            $.get( "http://localhost/water_off", function( data ) {
+            $.get( $SCRIPT_ROOT + '/water_off', function( data ) {
                 console.log(data);
             })
             
@@ -210,7 +210,7 @@
 
         function light_on() {
             console.log("THIS MUST TOGGLE THE LIGHT");
-            $.get( "http://localhost/COB_on", function( data ) {
+            $.get( $SCRIPT_ROOT + '/COB_on', function( data ) {
                 console.log(data);
             })
             
@@ -218,7 +218,7 @@
 
         function light_off() {
             console.log("THIS MUST TOGGLE THE LIGHT");
-            $.get( "http://localhost/COB_off", function( data ) {
+            $.get( $SCRIPT_ROOT + '/COB_off', function( data ) {
                 console.log(data);
             })
             
@@ -226,7 +226,7 @@
 
         function get_temp() {
             console.log("THIS MUST RETURN THE TEMP");
-            $.get( "http://localhost:5000/temperature", function( data ) {
+            $.get( $SCRIPT_ROOT + '/temperature', function( data ) {
                 console.log("TEMP STATUS", data);
                 $('#temperature').html(data.temperature)
             })
@@ -235,7 +235,7 @@
 
         function get_humidity() {
             console.log("THIS MUST TOGGLE THE LIGHT");
-            $.get( "http://localhost:5000/humidity", function( data ) {
+            $.get( $SCRIPT_ROOT + '/humidity', function( data ) {
                 console.log("HUMIDITY STATUS", data);
                 $('#humidity').html(data.humidity)
             })
@@ -244,7 +244,7 @@
 
          function get_water_status() {
             console.log("THIS MUST TOGGLE THE LIGHT");
-            $.get( "http://localhost:5000/water_status", function( data ) {
+            $.get( $SCRIPT_ROOT + '/water_status', function( data ) {
                 console.log("WATER STATUS", data);
                 $('#water_status').html(data.status)
             })
