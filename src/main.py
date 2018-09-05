@@ -24,7 +24,7 @@ security = Security(app, user_datastore)
 water_pin = 17
 COB_pin = 18
 temp_hum_pin = 15
-vent_pin = 15
+vent_pin = 14
 
 # Celery conf
 from celery import Celery

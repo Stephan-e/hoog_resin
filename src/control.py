@@ -26,7 +26,7 @@ GPIO.setmode(GPIO.BCM)
 # gpioList2 = [14,15]
 
 # Set mode for each gpio pin
-GPIO.setup(17, GPIO.OUT, initial= GPIO.HIGH)
+GPIO.setup(14, GPIO.OUT, initial= GPIO.HIGH)
 GPIO.setup(17, GPIO.OUT, initial= GPIO.LOW)
 GPIO.setup(18, GPIO.OUT, initial= GPIO.HIGH)
 
