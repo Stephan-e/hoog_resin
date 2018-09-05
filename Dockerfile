@@ -20,7 +20,9 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 		redis-server \
 		nano \
 		git \
-		python3-pip 
+		python3-pip \
+		fswebcam \
+		cron
 	# && rm -rf /var/lib/apt/lists/* \
 	# cd /tmp/ && git clone https://github.com/adafruit/Adafruit_Python_DHT.git && \
     # cd Adafruit_Python_DHT && python3 setup.py install && \
