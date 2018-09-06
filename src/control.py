@@ -6,11 +6,11 @@ import sys
 def install(package):
     subprocess.call([sys.executable, "-m", "pip", "install", package])
 
-try:
-    install('Adafruit-DHT==1.3.4')
+ry:
     import Adafruit_DHT
 except:
-    raise ValueError('Failed to import and install Adafruit.')
+    install('Adafruit-DHT==1.3.4')
+    import Adafruit_DHT
 
 
 
