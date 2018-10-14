@@ -7,7 +7,7 @@ from flask_security import Security, login_required, \
      SQLAlchemySessionUserDatastore
 from database import db_session, init_db
 from models import User, Role
-from camera import Camera
+from camera_pi import Camera
 
 
 app = Flask(__name__)
