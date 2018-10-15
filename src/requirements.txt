@@ -24,6 +24,6 @@ RPi.Gpio
 flask_security
 flask_sqlalchemy
 bcrypt
-
+picamera==1.13
 
 
