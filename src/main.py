@@ -38,19 +38,27 @@ from celery.schedules import crontab
 app.config['CELERYBEAT_SCHEDULE'] = {
     'water-every-morning': {
         'task': 'tasks.turn_water_on',
-        'schedule': crontab(hour=10, minute=0)
+        'schedule': crontab(hour=get_hour().water_on, minute=0)
     },
     'water-later': {
         'task': 'tasks.turn_water_off',
-        'schedule': crontab(hour=10, minute=1)
+        'schedule': crontab(hour=get_hour().water_off, minute=1)
     },
     'COB-every-morning': {
         'task': 'tasks.turn_COB_on',
-        'schedule': crontab(hour=8, minute=0)
+        'schedule': crontab(hour=get_hour().COB_on, minute=0)
     },
     'COB-later': {
         'task': 'tasks.turn_COB_off',
-        'schedule': crontab(hour=23, minute=0)
+        'schedule': crontab(hour=get_hour().COB_off, minute=0)
+    }
+    'vent-every-morning': {
+        'task': 'tasks.turn_vent_on',
+        'schedule': crontab(hour=get_hour().vent_on, minute=0)
+    },
+    'vent-later': {
+        'task': 'tasks.turn_vent_off',
+        'schedule': crontab(hour=get_hour().vent_off, minute=0)
     }
 }
 
@@ -162,7 +170,11 @@ def get_vent_on():
         status=GPIO.input(vent_pin)
     )
 
-
+@app.route('/schedule', methods = ['POST'])
+def post_schedule():
+    if request.method == 'POST':
+       return jsonify(request.form)
+    # data = request.form
 
 @app.route('/temperature')
 def get_temperature():
