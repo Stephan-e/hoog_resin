@@ -1,0 +1,8 @@
+{
+    "water_hour_on" : 8,
+    "water_hour_off" : 8, 
+    "COB_hour_on" : 8,
+    "COB_hour_off" : 15,
+    "vent_hour_on" : 6,
+    "vent_hour_off" : 12
+}

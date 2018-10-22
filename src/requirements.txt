@@ -22,7 +22,6 @@ Werkzeug==0.10.4
 zeroconf==0.17.4
 RPi.Gpio
 flask_security
-flask_sqlalchemy
 bcrypt
 picamera==1.13
 
