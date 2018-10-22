@@ -23,6 +23,6 @@ zeroconf==0.17.4
 RPi.Gpio
 flask_security
 bcrypt
-
+picamera==1.13
 
 

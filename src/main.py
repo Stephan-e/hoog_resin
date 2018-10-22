@@ -6,7 +6,7 @@ from flask import Flask, request, flash, url_for, redirect, \
 from control import set_status, get_temp, get_humid, get_hour 
 import RPi.GPIO as GPIO
 
-from camera import Camera
+from camera_pi import Camera
 
 from celery import Celery
 
