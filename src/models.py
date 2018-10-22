@@ -32,3 +32,13 @@ class User(Base, UserMixin):
     confirmed_at = Column(DateTime())
     roles = relationship('Role', secondary='roles_users',
                          backref=backref('users', lazy='dynamic'))
+
+class Schedule(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    water_hour_on = Column(Integer, default=8)
+    water_hour_off = Column(Integer, default=8)
+    COB_hour_on = Column(Integer, default=8)
+    COB_hour_off = Column(Integer, default=20)
+    vent_hour_on = Column(Integer, default=6)
+    vent_hour_off = Column(Integer, default=12)
