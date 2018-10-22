@@ -11,7 +11,7 @@ try:
 except:
     install('Adafruit-DHT==1.3.4')
     import Adafruit_DHT
-
+ 
 
 
 #import logging
