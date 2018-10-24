@@ -18,7 +18,7 @@ content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'salt'
-
+ 
 water_pin = 17
 COB_pin = 18
 temp_hum_pin = 15
