@@ -4,8 +4,9 @@
 # base image
 #============
 # for deployment to RPi2 via Resin.io
+#
+FROM resin/raspberrypi3-python
 # FROM resin/armv7hf-debian:latest	
-FROM resin/%%RESIN_MACHINE_NAME%%-python
 
 
 ENV READTHEDOCS True
