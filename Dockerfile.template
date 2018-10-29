@@ -5,10 +5,11 @@
 #============
 # for deployment to RPi2 via Resin.io
 # FROM resin/armv7hf-debian:latest	
+FROM resin/%%RESIN_MACHINE_NAME%%-debian
 
 WORKDIR /usr/src/app
 
-FROM resin/%%RESIN_MACHINE_NAME%%-debian
+
 
 ENV INITSYSTEM on
 
