@@ -7,7 +7,6 @@
 # FROM resin/armv7hf-debian:latest	
 FROM resin/%%RESIN_MACHINE_NAME%%-debian
 
-WORKDIR /usr/src/app
 
 
 
@@ -62,6 +61,7 @@ COPY src/ /app
 #===================
 RUN /venv/bin/pip install -r /app/requirements.txt 
 
+WORKDIR /usr/src/app
 
 
 RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/latest -s \
