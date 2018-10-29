@@ -70,11 +70,11 @@ RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/lates
 
 COPY scripts/start.sh .
 
-CMD ["bash", "start.sh"]
+# CMD ["bash", "start.sh"]
 
 
 #run the app when the container starts
 #======================================s
-# CMD ["/venv/bin/honcho", "-f", "/app/Procfile", "start"]
+CMD ["/venv/bin/honcho", "-f", "/app/Procfile", "start"]
 
 EXPOSE 80
