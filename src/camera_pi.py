@@ -4,10 +4,12 @@ from time import strftime, sleep
 import picamera
 from base_camera import BaseCamera
 
-lastfile = "1.jpg"
+lastfile = "static/1"
 
 
 def save_image():
+    timestr = time.strftime("%Y%m%d-%H%M%S")
+    lastfile = "static/snap_" + timestr + ".jpg"
     camera = picamera.PiCamera()
     camera.resolution = (640, 480)
     camera.start_preview()
@@ -15,6 +17,8 @@ def save_image():
     camera.capture(lastfile)
     camera.stop_preview()
     camera.close()
+
+    return(lastfile)
 
 
 # class Camera(BaseCamera):

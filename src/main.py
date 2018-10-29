@@ -29,7 +29,7 @@ COB_pin = 18
 temp_hum_pin = 15
 vent_pin = 14
 
-lastfile = "1.jpg"
+lastfile = "static/1.jpg"
 
 server_url = "https://hoog-cluster.herokuapp.com/api/"
 
@@ -218,8 +218,7 @@ def get_humidity():
 
 @app.route('/snapshot')
 def snapshot():
-    save_image()
-    return send_file(lastfile)
+    return send_file(save_image())
 
 @app.route("/snapshot2")
 def getImage():

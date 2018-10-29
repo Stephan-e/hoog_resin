@@ -89,8 +89,10 @@
 
                             <!--Card content-->
                             <div class="card-body">
-                                    <h3>Snapshot </h3>
-                                <img src="{{ url_for('video_feed') }}">    
+                                    <p role="button" class="btn btn-info badge-primary"  onClick="window.location.reload()"> 
+                                            Snapshot
+                                        </p>
+                                <img id="refresh" src="{{ url_for('snapshot') }}">    
                             </div>
     
                         </div>
@@ -198,12 +200,14 @@
 
     <!-- Initializations -->
     <script type="text/javascript">
+
         // Animations initialization
         new WOW().init();
 
         get_humidity()
         get_water_status()
         get_temp()
+        snapshot()
 
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
@@ -278,6 +282,14 @@
             $.get( {{ request.script_root|tojson|safe }} + '/water_status', function( data ) {
                 console.log("WATER STATUS", data);
                 $('#water_status').html(data.status)
+            })
+            
+        }
+
+        function snapshot() {
+            console.log("SNAPSHOT");
+            $.get( {{ request.script_root|tojson|safe }} + '/snapshot', function( data ) {
+                console.log(data);
             })
             
         }
