@@ -89,7 +89,7 @@
 
                             <!--Card content-->
                             <div class="card-body">
-                                    <p role="button" class="btn btn-info badge-primary"  onClick="window.location.reload()"> 
+                                    <p role="button" class="btn btn-info badge-primary"  onclick="snapshot()" > 
                                             Snapshot
                                         </p>
                                 <img id="refresh" src="{{ url_for('snapshot') }}">    
@@ -108,7 +108,7 @@
                             <!-- List group links -->
                             <div class="list-group list-group-flush">
                                     <a class="list-group-item list-group-item-action waves-effect">
-                                            Measurements:     
+                                        Measurements:     
                                             
                                     </a>
 
@@ -145,6 +145,13 @@
                                     
                                     <a class="list-group-item  ">
                                         <p>Grow Schedule:</p>
+                                        
+                                        <a class="list-group-item list-group-item-action ">
+                                            Current cycle
+                                            <span id='schedule' class="badge badge-primary badge pull-right">
+                                                
+                                        </a>
+
                                         <p>
                                             18 hours
                                         <span class="badge badge-success badge pull-right">active
@@ -208,6 +215,7 @@
         get_water_status()
         get_temp()
         snapshot()
+        schedule()
 
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
@@ -277,6 +285,15 @@
             
         }
 
+        function schedule() {
+            console.log("THIS MUST RETURN THE TEMP");
+            $.get( {{ request.script_root|tojson|safe }} + '/schedule', function( data ) {
+                console.log("TEMP STATUS", data);
+                $('#schedule').html(data)
+            })
+            
+        }
+
          function get_water_status() {
             console.log("THIS MUST TOGGLE THE LIGHT");
             $.get( {{ request.script_root|tojson|safe }} + '/water_status', function( data ) {
@@ -291,6 +308,7 @@
             $.get( {{ request.script_root|tojson|safe }} + '/snapshot', function( data ) {
                 console.log(data);
             })
+            window.location.reload()
             
         }
     </script>

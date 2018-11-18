@@ -182,10 +182,11 @@ def get_measurements():
 @app.route('/schedule', methods = ['POST', 'GET'])
 def post_schedule():
     if request.method == 'POST':
+        req_data = request.get_json()
         with open('schedule.json', 'w') as outfile:
-            json.dump(request.json, outfile)
-        
-        return jsonify(success="true")
+            json.dump(req_data, outfile)
+
+        return jsonify(req_data)
     else:
         with open('schedule.json') as f:
             data = json.load(f)

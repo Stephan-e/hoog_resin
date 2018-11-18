@@ -28,12 +28,10 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 		git \
 		python3-pip \
 		fswebcam \
-		cron \
-		dnsmasq \
-		wireless-tools \
+		cron 
 
-	&& apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+	# && apt-get clean \
+    # && rm -rf /var/lib/apt/lists/*
 	# && rm -rf /var/lib/apt/lists/* \
 	# cd /tmp/ && git clone https://github.com/adafruit/Adafruit_Python_DHT.git && \
     # cd Adafruit_Python_DHT && python3 setup.py install && \
