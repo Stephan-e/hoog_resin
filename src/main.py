@@ -179,6 +179,22 @@ def get_measurements():
 
     )  
 
+@app.route('/status')
+def get_status():
+    humidity = get_humid(temp_hum_pin)
+    temperature = get_temp(temp_hum_pin)
+    with open('schedule.json') as f:
+            data = json.load(f)
+
+    return jsonify(
+        vent=GPIO.input(vent_pin),
+        light=GPIO.input(COB_pin),
+        water=GPIO.input(water_pin),
+        humidity=humidity,
+        temperature=temperature,
+        schedule=data
+    )  
+
 @app.route('/schedule', methods = ['POST', 'GET'])
 def post_schedule():
     if request.method == 'POST':

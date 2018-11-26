@@ -10,10 +10,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
     <!-- Material Design Bootstrap -->
     <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
+    <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
+
     <!-- Your custom styles (optional) -->
     <link href="{{ url_for('static', filename='css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <!-- <link href="css/style.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"> -->
+
+
 </head>
 
 <body class="teal lighten-5">
@@ -53,15 +63,31 @@
 
                         <!--Card content-->
                         <div class="card-body">
+                            <div>
+
+                            <!-- <p>COB light</p>
+
+                            
+
+                            <div class="onoffswitch">
+                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                                    <label class="onoffswitch-label" for="myonoffswitch">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div> -->
 
                             <p onclick="light_on()" role="button" class="btn btn-info badge-primary"> 
                                 COB light on
                             </p>
 
                             <p onclick="light_off()" role="button" class="btn btn-info badge-primary"> 
-                                    COB light off
+                                COB light off
                             </p>
 
+                            </div>
+
+                            <div>
                             <p role="button" class="btn btn-info badge-primary"  onclick="set_water_on()"> 
                                 Water on
                             </p>
@@ -69,14 +95,16 @@
                             <p role="button" class="btn btn-info badge-primary"  onclick="set_water_off()"> 
                                     Water off
                             </p>
+                            </div>
+                            <div>
+                                <p role="button" class="btn btn-info badge-primary"  onclick="set_vent_on()"> 
+                                    Vent on
+                                </p>
 
-                            <p role="button" class="btn btn-info badge-primary"  onclick="set_vent_on()"> 
-                                   Ventilation on
-                            </p>
-
-                            <p role="button" class="btn btn-info badge-primary"  onclick="set_vent_off()"> 
-                                    Ventilation off
-                            </p>
+                                <p role="button" class="btn btn-info badge-primary"  onclick="set_vent_off()"> 
+                                        Vent off
+                                </p>
+                            </div>
 
                         </div>
 
@@ -92,6 +120,10 @@
                                     <p role="button" class="btn btn-info badge-primary"  onclick="snapshot()" > 
                                             Snapshot
                                         </p>
+                                        <p role="button" class="btn btn-info badge-primary"  onclick="window.location.reload()" > 
+                                            Refresh
+                                        </p>
+
                                 <img id="refresh" src="{{ url_for('snapshot') }}">    
                             </div>
     
@@ -147,37 +179,38 @@
                                         <p>Grow Schedule:</p>
                                         
                                         <a class="list-group-item list-group-item-action ">
-                                            Current cycle
-                                            <span id='schedule' class="badge badge-primary badge pull-right">
-                                                
+                                            COB light off
+                                            <span id='schedule_COB_hour_on' class="badge badge-primary badge pull-right">:00   
                                         </a>
 
-                                        <p>
-                                            18 hours
-                                        <span class="badge badge-success badge pull-right">active
+                                        <a class="list-group-item list-group-item-action ">
+                                            COB light off
+                                            <span id='schedule_COB_hour_off' class="badge badge-primary badge pull-right">
+                                                </span>:00    
+                                        </a>
                                         
-                                            </span>
-                                            
+                                        <a class="list-group-item list-group-item-action ">
+                                            Ventilation on 
+                                            <span id='schedule_vent_hour_on' class="badge badge-primary badge pull-right"> :00    
+                                        </a>
+                                        <a class="list-group-item list-group-item-action ">
+                                            Vent hour off
+                                            <span id='schedule_vent_hour_off' class="badge badge-primary badge pull-right"> :00    
+                                        </a>
+                                        
+                                        <a class="list-group-item list-group-item-action ">
+                                            Water on:
+                                            <span id='schedule_water_hour_on' class="badge badge-primary badge pull-right"> :00    
+                                        </a>
 
-                                            </p>
-                                            <p>
-                                        22 hours
-                                        <span class="badge badge-danger badge pull-right">disabled
-                                        
-                                            </span>
-                                        </p>
+                                        <a class="list-group-item list-group-item-action ">
+                                            Water off
+                                            <span id='schedule_water_hour_off' class="badge badge-primary badge pull-right">:01    
+                                        </a>
   
                                     </a>
-                                    <a class="list-group-item list-group-item-action waves-effect">
-                                        
-                                        
-                                    </a>
-                                    
                                 </div>
-                                <!-- List group links -->
                             </div>
-    
-                            
                     </div>
                 </div>
                 <!--Grid column-->
@@ -216,6 +249,7 @@
         get_temp()
         snapshot()
         schedule()
+        get_state()
 
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
@@ -286,15 +320,29 @@
         }
 
         function schedule() {
-            console.log("THIS MUST RETURN THE TEMP");
+            console.log("THIS MUST RETURN THE Schedule");
             $.get( {{ request.script_root|tojson|safe }} + '/schedule', function( data ) {
                 console.log("TEMP STATUS", data);
-                $('#schedule').html(data)
+                $('#schedule_COB_hour_off').html(data.COB_hour_off)
+                $('#schedule_COB_hour_on').html(data.COB_hour_on)
+                $('#schedule_vent_hour_off').html(data.vent_hour_off)
+                $('#schedule_vent_hour_on').html(data.vent_hour_on)
+                $('#schedule_water_hour_off').html(data.water_hour_off)
+                $('#schedule_water_hour_on').html(data.water_hour_on)
+
             })
             
         }
 
-         function get_water_status() {
+        function get_water_status() {
+            console.log("THIS MUST TOGGLE THE LIGHT");
+            $.get( {{ request.script_root|tojson|safe }} + '/water_status', function( data ) {
+                console.log("WATER STATUS", data);
+                $('#water_status').html(data.status)
+            })
+            
+        }
+        function get_water_status() {
             console.log("THIS MUST TOGGLE THE LIGHT");
             $.get( {{ request.script_root|tojson|safe }} + '/water_status', function( data ) {
                 console.log("WATER STATUS", data);
@@ -308,7 +356,6 @@
             $.get( {{ request.script_root|tojson|safe }} + '/snapshot', function( data ) {
                 console.log(data);
             })
-            window.location.reload()
             
         }
     </script>
