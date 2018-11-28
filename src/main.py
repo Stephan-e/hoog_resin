@@ -60,10 +60,10 @@ app.config['CELERYBEAT_SCHEDULE'] = {
         'task': 'tasks.turn_vent_off',
         'schedule': crontab(hour=get_hour(vent_pin, False), minute=0)
     },
-    'measurements': {
-        'task': 'tasks.measurements',
-        'schedule': crontab(hour='*', minute=0)
-    }
+    # 'measurements': {
+    #     'task': 'tasks.measurements',
+    #     'schedule': crontab(hour='*', minute=0)
+    # }
 }
 
 celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])

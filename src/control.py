@@ -37,6 +37,10 @@ vent_pin = 14
 
 #GPIO.setup(gpioList2, GPIO.IN)
 
+
+def measure(pin):
+    return Adafruit_DHT.read(Adafruit_DHT.DHT22, pin)
+
 def set_status(pin,status):
     GPIO.output(pin, status)
     return GPIO.input(pin)
@@ -45,15 +49,14 @@ def get_status(pin,status):
     return GPIO.input(pin)
 
 def get_temp(pin):
-    humidity, temperature = Adafruit_DHT.read(Adafruit_DHT.DHT22, pin)
-    
-    if humidity is not None and temperature is not None:
-        return temperature
-    else:
-        return 0  
+    temperature = None
+    while temperature != None:
+        humidity, temperature = measure(pin)
+
+    return temperature
 
 def get_humid(pin):
-    humidity, temperature = Adafruit_DHT.read(Adafruit_DHT.DHT22, pin)
+    humidity, temperature = measure(pin)
     
     if humidity is not None and temperature is not None:
         return humidity
