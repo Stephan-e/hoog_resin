@@ -23,8 +23,7 @@ content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 app.config['DEBUG'] = False
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'salt'
-CORS(app)
-CORS(autoINFER_app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
+CORS(app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
 
  
 water_pin = 17
