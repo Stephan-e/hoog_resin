@@ -49,10 +49,10 @@ def get_status(pin,status):
     return GPIO.input(pin)
 
 def get_temp(pin):
-    temperature = None
-    while temperature != None:
+    while True:
         humidity, temperature = measure(pin)
-
+        if temperature is not None and temperature is not None:
+            break
     return temperature
 
 def get_humid(pin):
