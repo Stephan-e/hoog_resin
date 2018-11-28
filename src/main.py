@@ -24,6 +24,7 @@ app.config['DEBUG'] = False
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'salt'
 CORS(app)
+CORS(autoINFER_app, resources={r"/*": {"origins": "*"}}, send_wildcard=True)
 
  
 water_pin = 17
@@ -187,8 +188,7 @@ def get_status():
     temperature = get_temp(temp_hum_pin)
     with open('schedule.json') as f:
             data = json.load(f)
-
-    return jsonify(
+    response = jsonify(
         vent=GPIO.input(vent_pin),
         light=GPIO.input(COB_pin),
         water=GPIO.input(water_pin),
@@ -196,6 +196,8 @@ def get_status():
         temperature=temperature,
         schedule=data
     )  
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route('/schedule', methods = ['POST', 'GET'])
 def post_schedule():
