@@ -10,7 +10,7 @@ import RPi.GPIO as GPIO
 from camera_pi import save_image
 from celery import Celery
 from picamera import PiCamera
-
+from flask_cors import CORS
 import requests
 
 from datetime import timedelta, datetime
@@ -23,6 +23,8 @@ content_type_json = {'Content-Type': 'text/css; charset=utf-8'}
 app.config['DEBUG'] = False
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SECURITY_PASSWORD_SALT'] = 'salt'
+CORS(app)
+
  
 water_pin = 17
 COB_pin = 18
