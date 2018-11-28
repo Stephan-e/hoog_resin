@@ -24,5 +24,6 @@ RPi.Gpio
 flask_security
 bcrypt
 picamera==1.13
+flask-cors
 
 
