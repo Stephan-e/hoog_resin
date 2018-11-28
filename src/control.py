@@ -56,12 +56,11 @@ def get_temp(pin):
     return temperature
 
 def get_humid(pin):
-    humidity, temperature = measure(pin)
-    
-    if humidity is not None and temperature is not None:
-        return humidity
-    else:
-        return 0        
+    while True:
+        humidity, temperature = measure(pin)
+        if temperature is not None and temperature is not None:
+            break
+    return humidity     
 
 def get_hour(pin, state):
 
