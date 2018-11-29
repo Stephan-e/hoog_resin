@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import subprocess
 import sys, json
+import time
 
 def install(package):
     subprocess.call([sys.executable, "-m", "pip", "install", package])
@@ -49,17 +50,23 @@ def get_status(pin,status):
     return GPIO.input(pin)
 
 def get_temp(pin):
+    timeout = time.time() + 1
     while True:
         humidity, temperature = measure(pin)
-        if temperature is not None and temperature is not None:
+        if temperature is not None and temperature is not None or time.time() > timeout:
             break
+        
+    round(temperature,2)
     return temperature
 
 def get_humid(pin):
+    timeout = time.time() + 1  
     while True:
         humidity, temperature = measure(pin)
-        if temperature is not None and temperature is not None:
+        if temperature is not None and temperature is not None or time.time() > timeout:
             break
+
+    round(humidity,2)
     return humidity     
 
 def get_hour(pin, state):
