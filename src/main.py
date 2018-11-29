@@ -7,7 +7,7 @@ from control import set_status, get_status, get_temp, get_humid, get_hour
 import RPi.GPIO as GPIO
 
 #from camera_pi import Camera
-from camera_pi import save_image
+from camera_pi import save_image, save_thumbnail_image
 from celery import Celery
 from picamera import PiCamera
 from flask_cors import CORS
