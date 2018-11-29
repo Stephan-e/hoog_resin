@@ -196,7 +196,8 @@ def get_stats():
         water=get_status(water_pin),
         humidity=humidity,
         temperature=temperature,
-        schedule=data
+        schedule=data,
+        image = image
     )  
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
