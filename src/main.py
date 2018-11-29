@@ -3,7 +3,7 @@ import json
 from flask import Flask, request, flash, url_for, redirect, \
      render_template, jsonify, Response, send_file
 
-from control import set_status, get_temp, get_humid, get_hour 
+from control import set_status, get_status, get_temp, get_humid, get_hour 
 import RPi.GPIO as GPIO
 
 #from camera_pi import Camera
@@ -182,15 +182,15 @@ def get_measurements():
     )  
 
 @app.route('/status')
-def get_status():
+def get_stats():
     humidity = get_humid(temp_hum_pin)
     temperature = get_temp(temp_hum_pin)
     with open('schedule.json') as f:
             data = json.load(f)
     response = jsonify(
-        vent=GPIO.input(vent_pin),
-        light=GPIO.input(COB_pin),
-        water=GPIO.input(water_pin),
+        vent=get_status(vent_pin),
+        light=get_status(COB_pin),
+        water=get_status(water_pin),
         humidity=humidity,
         temperature=temperature,
         schedule=data

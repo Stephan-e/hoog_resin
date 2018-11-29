@@ -46,8 +46,12 @@ def set_status(pin,status):
     GPIO.output(pin, status)
     return GPIO.input(pin)
 
-def get_status(pin,status):
-    return GPIO.input(pin)
+def get_status(pin):
+    status = GPIO.input(pin)
+    if status == 1:
+        return True
+    elif status == 0: 
+        return False
 
 def get_temp(pin):
     timeout = time.time() + 1
