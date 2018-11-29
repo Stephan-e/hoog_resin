@@ -238,7 +238,9 @@ def get_humidity():
 
 @app.route('/snapshot')
 def snapshot():
-    return send_file(save_image())
+    response = send_file(save_image())
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route("/snapshot2")
 def getImage():
