@@ -185,6 +185,9 @@ def get_measurements():
 def get_stats():
     humidity = get_humid(temp_hum_pin)
     temperature = get_temp(temp_hum_pin)
+    image = send_file(save_thumbnail_image(),
+                        attachment_filename='logo.png',
+                        mimetype='image/png')
     with open('schedule.json') as f:
             data = json.load(f)
     response = jsonify(

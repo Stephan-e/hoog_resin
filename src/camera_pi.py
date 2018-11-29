@@ -20,6 +20,19 @@ def save_image():
 
     return(lastfile)
 
+def save_thumbnail_image():
+    timestr = time.strftime("%Y%m%d-%H%M%S")
+    lastfile = "static/snap_" + timestr + ".jpg"
+    camera = picamera.PiCamera()
+    camera.resolution = (120, 100)
+    camera.start_preview()
+    sleep(2)
+    camera.capture(lastfile)
+    camera.stop_preview()
+    camera.close()
+
+    return(lastfile)
+
 
 # class Camera(BaseCamera):
 #     @staticmethod
