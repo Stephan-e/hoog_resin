@@ -197,9 +197,9 @@ def get_stats():
         humidity=humidity,
         temperature=temperature,
         schedule=data,
-        image = image
     )  
     response.headers.add('Access-Control-Allow-Origin', '*')
+    response.body.add(image)
     return response
 
 @app.route('/schedule', methods = ['POST', 'GET'])
