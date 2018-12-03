@@ -240,7 +240,7 @@ def snapshot():
 
 @app.route("/snapshot2")
 def getImage():
-     response = send_file(save_thumbnail_image(),
+    response = send_file(save_thumbnail_image(),
                         attachment_filename='logo.png',
                         mimetype='image/png')
     response.headers.add('Access-Control-Allow-Origin', '*')
