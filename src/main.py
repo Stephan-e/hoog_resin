@@ -185,9 +185,7 @@ def get_measurements():
 def get_stats():
     humidity = get_humid(temp_hum_pin)
     temperature = get_temp(temp_hum_pin)
-    image = send_file(save_thumbnail_image(),
-                        attachment_filename='logo.png',
-                        mimetype='image/png')
+    
     with open('schedule.json') as f:
             data = json.load(f)
     response = jsonify(
@@ -199,7 +197,7 @@ def get_stats():
         schedule=data,
     )  
     response.headers.add('Access-Control-Allow-Origin', '*')
-    response.body.add(image)
+    #response.body.add(image)
     return response
 
 @app.route('/schedule', methods = ['POST', 'GET'])
@@ -214,12 +212,6 @@ def post_schedule():
         with open('schedule.json') as f:
             data = json.load(f)
         return jsonify(data)
-
-@app.route('/show')
-def show_all():
-    with open('schedule.json') as f:
-        data = json.load(f)
-    return jsonify(data)
 
 @app.route('/temperature')
 def get_temperature():
@@ -248,9 +240,11 @@ def snapshot():
 
 @app.route("/snapshot2")
 def getImage():
-     camera.capture(lastfile)
-     camera.close()
-     return send_file(lastfile)
+     response = send_file(save_thumbnail_image(),
+                        attachment_filename='logo.png',
+                        mimetype='image/png')
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 # @app.route('/create_user')
 # def create_user():
